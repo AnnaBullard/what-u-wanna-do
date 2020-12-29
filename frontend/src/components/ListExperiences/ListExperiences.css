@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap'); */
+
+.experience-card {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 300px;
+    height: 370px;
+    padding: 15px;
+    border: 1px solid #333;
+    position: relative;
+    margin: 20px;
+}
+
+.experience-card:hover {
+    transform: rotate(0turn) !important;
+}
+
+.experience-card img {
+    display: block;
+    width: 270px;
+    height: 270px;
+    object-fit: cover;
+}
+
+.experience-card {
+    color: #333;
+}
+
+.experience-card .price {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    font-family: 'Amatic SC', cursive;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+.experience-card .title {
+    font-size: 30px;
+}
+.experience-card .host{
+    font-size: 20px;
+}
+.experience-card .host, .experience-card .title {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    display: block;
+}

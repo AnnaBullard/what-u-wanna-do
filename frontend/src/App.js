@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
+
+import Topbar from "./components/Topbar";
+import ListExperiences from './components/ListExperiences';
 
 function App() {
   const dispatch = useDispatch();
@@ -13,11 +15,11 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Topbar isLoaded={isLoaded}/>
       {isLoaded && (
         <Switch>
-          <Route path="/">
-            <h1>You are here</h1>
+          <Route exact path="/">
+            <ListExperiences />
           </Route>
         </Switch>
       )}

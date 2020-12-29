@@ -18,13 +18,13 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       time: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DATE
       },
       timeMin: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TIME
       },
       timeMax: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TIME
       },
       price: {
         type: Sequelize.DECIMAL(10, 2)
