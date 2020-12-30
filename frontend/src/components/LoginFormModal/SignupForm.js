@@ -24,7 +24,8 @@ function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
+      <h3>Sign Up</h3>
+      <ul style={errors.length?{}:{display: "none"}}>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <label>

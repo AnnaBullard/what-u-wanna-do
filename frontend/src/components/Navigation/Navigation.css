@@ -1,0 +1,22 @@
+.navbar, .navbar button, .navbar a {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: #333
+}
+
+.navbar button:hover, .navbar a:hover{
+    color: red
+}
+
+.navbar {
+    text-align: right;
+    position: relative;
+}
+
+.navbar button:focus {
+    outline: none;
+}

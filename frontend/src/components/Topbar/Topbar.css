@@ -26,6 +26,17 @@
     font-size:40px;
     display: inline-block;
 }
+
+.logo a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.5s;
+}
+.logo a:hover {
+    color: red;
+    transition: color 0.5s;
+}
+
 .logo span {
     display: inline-block;
     width: 0;

@@ -13,6 +13,14 @@ export default function Calendar (props) {
     //radio - select one of available   For: making bookings
     //checkbox select many,             For: creating experiences
     //"" - select one of any            For: selecting starting-ending date
+
+    const bookingDates = new Set();
+    if (type==="radio") {
+        props.bookings.forEach(book => {
+            console.log(book.date)
+        })
+    }
+
     if (!month || !year){
         let dt = new Date();
         setMonth(dt.getMonth()+1);
@@ -74,7 +82,7 @@ export default function Calendar (props) {
                     setMonth(month-1);
                 }
                 setSelected(new Set());
-            }}><i class="fas fa-angle-double-left"></i></button>
+            }}><i className="fas fa-angle-double-left"></i></button>
         </div>
         <div className="next-month">
             <button onClick={()=> {
@@ -85,7 +93,7 @@ export default function Calendar (props) {
                     setMonth(month+1);
                 }
                 setSelected(new Set());
-            }}><i class="fas fa-angle-double-right"></i></button>
+            }}><i className="fas fa-angle-double-right"></i></button>
         </div>
     </div>
     )

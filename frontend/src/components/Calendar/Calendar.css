@@ -11,8 +11,7 @@
 .calendar-grid .header {
     font-weight: bold;
     width: 100%;
-    border-bottom: 1px solid #333;
-    /* border-right: 1px solid #333; */
+    border-bottom: 1px solid #AAA;
     text-align: center;
 }
 .calendar {
@@ -46,14 +45,15 @@
     border: none;
     border-radius: 50%;
     color: #333;
-    box-shadow: 0 0 8px 0px #000;
+    box-shadow: 0 0 2px 0px #000;
+    transition: background-color 1s, box-shadow 1s;
 }
 
 .calendar .prev-month:hover button,.calendar .next-month:hover button {
     background-color: rgba(255,255,255,0);
     color: #fff;
     box-shadow: 0 0 0 0 #fff;
-    transition: background-color 0.5s;
+    transition: background-color 1s, box-shadow 1s;
 }
 
 .calendar .prev-month {
@@ -76,4 +76,5 @@
 .day.selected,.day.check:hover,.day.radio:hover {
     background: linear-gradient(45deg, rgba(255,0,0,1),rgba(255,165,0,1));
     color: #fff;
+    cursor: pointer;
 }

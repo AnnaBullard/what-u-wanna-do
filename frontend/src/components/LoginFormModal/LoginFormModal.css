@@ -1,0 +1,69 @@
+form {
+    font-family: 'Amatic SC', cursive;
+    display: flex;
+    flex-direction: column;
+    margin:20px;
+    border: 1px solid #AAA;
+    padding:20px;
+    width: 350px;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+form h3 {
+    font-size: 22px;
+}
+
+form ul {
+    display: block;
+    min-height: 0px;
+    font-size: 20px;
+}
+
+form button {
+    margin-top: 15px;
+    padding: 5px;
+    width: 80px;
+    align-self: center;
+    font-family: 'Amatic SC', cursive;
+    font-size: 20px;
+    font-weight: bold;
+    background: #fff;
+    border-radius: 0;
+    border: 1px solid #AAA;
+}
+
+form button:hover {
+    background: linear-gradient(to left, red, orange);
+}
+
+form button:focus, form input:focus {
+    outline: 1px solid #AAA;
+}
+
+form input[type="text"],form input[type="password"],form input[type="number"], form input[type="date"] {
+    border-radius: 0;
+    border-radius: 0;
+    border: 1px solid #AAA;
+    padding: 5px 7px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.profile-dropdown {
+    position: relative;
+    right: 20px;
+    background: #fff;
+    box-shadow: 5px 5px 5px 0px #AAA;
+    padding:10px;
+}
+
+.profile-dropdown > ul {
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #AAA;
+    list-style: none;
+}

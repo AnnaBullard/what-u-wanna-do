@@ -16,6 +16,7 @@ export default function ExperiencePage () {
     },[dispatch, id]);
 
     const experience = useSelector(store => store.singleExperience);
+    const bookings = useSelector(store => store.bookings);
 
     return experience && (
         <div className="card-info">
@@ -28,7 +29,7 @@ export default function ExperiencePage () {
             <p>by {experience.User?experience.User.username:""}</p>
             <p><strong>Price:</strong> ${experience.currentPrice}</p>
             <p><strong>About:</strong> {experience.description}</p>
-            <Calendar />
+            <Calendar bookings={bookings}/>
         </div>
     )
 }
