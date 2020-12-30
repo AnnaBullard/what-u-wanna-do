@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;600;700&display=swap');
+
+.card-info {
+    position: relative;
+    padding-left: 560px;
+    margin:20px;
+}
+
+.card-image {
+    box-sizing: border-box;
+    border: 1px solid #333;
+    display: block;
+    position: absolute;
+    left:0;
+    padding: 20px;
+}
+
+.card-image img {
+    display: block;
+    max-width: 500px;
+    max-height: 500px;
+    margin: auto;
+}
+
+.card-info h1 {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+}
+.card-info p {
+    font-family: 'Raleway', sans-serif;
+}

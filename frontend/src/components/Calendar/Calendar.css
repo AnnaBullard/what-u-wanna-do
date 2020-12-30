@@ -1,0 +1,79 @@
+.calendar-grid {
+    display: grid;
+    width: 280px;
+    grid-template-columns: repeat(7, 1fr);
+    font-family: 'Amatic SC', cursive;
+    font-size: 20px;
+    justify-items: center;
+    margin-left: 40px;
+}
+
+.calendar-grid .header {
+    font-weight: bold;
+    width: 100%;
+    border-bottom: 1px solid #333;
+    /* border-right: 1px solid #333; */
+    text-align: center;
+}
+.calendar {
+    width: 360px;
+    height: 210px;
+    position: relative;
+}
+
+.calendar h2 {
+    font-family: 'Fredericka the Great', cursive;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+}
+
+.calendar .prev-month,.calendar .next-month {
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: linear-gradient(to right, red, orange);
+    padding: 0;
+}
+.calendar .prev-month button,.calendar .next-month button{
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,1);
+    border: none;
+    border-radius: 50%;
+    color: #333;
+    box-shadow: 0 0 8px 0px #000;
+}
+
+.calendar .prev-month:hover button,.calendar .next-month:hover button {
+    background-color: rgba(255,255,255,0);
+    color: #fff;
+    box-shadow: 0 0 0 0 #fff;
+    transition: background-color 0.5s;
+}
+
+.calendar .prev-month {
+    left: 0;
+}
+.calendar .next-month {
+    right: 0;
+}
+
+.day {
+    width: 100%;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.day.radio {
+    background: linear-gradient(45deg, rgba(0,255,0,0.3),rgba(255, 255, 0, 0.3));
+}
+
+.day.selected,.day.check:hover,.day.radio:hover {
+    background: linear-gradient(45deg, rgba(255,0,0,1),rgba(255,165,0,1));
+    color: #fff;
+}

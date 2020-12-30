@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 
 import Topbar from "./components/Topbar";
 import ListExperiences from './components/ListExperiences';
+import ExperiencePage from './components/ExperiencePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <ListExperiences />
+          </Route>
+          <Route exact path="/experiences/:id">
+            <ExperiencePage />
           </Route>
         </Switch>
       )}

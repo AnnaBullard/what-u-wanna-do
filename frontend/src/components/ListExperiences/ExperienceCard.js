@@ -9,7 +9,8 @@ export default function ExperienceCard ({activity}) {
     return (
         <Link to={`/experiences/${activity.id}`}>
             <div className="experience-card" style={style}>
-                <img src="/img/default-activity.jpg" />
+                {/*REPLACE IMG*/}
+                <img src="/img/default-activity.jpg" alt={activity.title}/>
                 <span className="price">${Math.round(activity.currentPrice)}</span>
                 <span className="title">{activity.title}</span>
                 <span className="host">by {activity.User.username}</span>

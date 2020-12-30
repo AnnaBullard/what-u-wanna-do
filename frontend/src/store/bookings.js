@@ -1,15 +1,14 @@
 import { fetch } from './csrf';
 
-const GET_LIST = "experiences/get_list";
+const GET_LIST = "bookings/get_list";
 
 const getList = (payload) => ({
     type: GET_LIST,
     payload
 });
 
-export const getExperiences = (type) => async dispatch => {
-    //types: booked, hosted, for available leave empty
-    let url = "/api/experiences"+(type?`/${type}`:"")
+export const getBookings = (id) => async dispatch => {
+    let url = `/api/experiences/${id}/bookings`
     const res = await fetch(url);
     if (res.ok) {
         dispatch(getList(res.data));
@@ -18,7 +17,7 @@ export const getExperiences = (type) => async dispatch => {
 
 const initialState = [];
 
-const ExperiencesReducer = (state = initialState, action) =>{
+const BookingsReducer = (state = initialState, action) =>{
     switch(action.type){
         case GET_LIST: {
             const newState = []
@@ -33,4 +32,4 @@ const ExperiencesReducer = (state = initialState, action) =>{
     }
 }
 
-export default ExperiencesReducer;
+export default BookingsReducer;

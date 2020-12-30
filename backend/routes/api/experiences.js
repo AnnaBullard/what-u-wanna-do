@@ -90,4 +90,26 @@ router.get("/hosted", restoreUser, asyncHandler(async (req,res) => {
     console.log(exp);
     return res.json(exp);
 }));
+
+router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const exp = await db.Experience.findByPk(id,{
+        include: [
+            {
+                model: db.User
+            }
+        ]
+    })
+    return res.json(exp);
+}))
+
+router.get("/:id(\\d+)/bookings", asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const exp = await db.Booking.findAll({
+        where:{
+            experienceId: id
+        }
+    })
+    return res.json(exp);
+}))
 module.exports = router;
