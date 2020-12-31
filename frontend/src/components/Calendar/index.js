@@ -14,14 +14,17 @@ export default function Calendar (props) {
     const MonthsArray = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     const type = props.type || ""
     const bookings = useSelector(state => state.bookings);
+    let dt = new Date();
+    const thisMonth = dt.getMonth()+1;
+    const thisYear = dt.getFullYear();
     //radio - select one of available   For: making bookings
     //checkbox select many,             For: creating experiences
     //"" - select one of any            For: selecting starting-ending date
 
     if (!month || !year){
         let dt = new Date();
-        setMonth(dt.getMonth()+1);
-        setYear(dt.getFullYear());
+        setMonth(thisMonth);
+        setYear(thisYear);
     }
 
     useEffect(()=>{
@@ -92,7 +95,7 @@ export default function Calendar (props) {
                 )
             })}
         </div>
-        <div className="prev-month">
+        <div className="prev-month" style={(thisMonth==month&&thisYear==year)?{visibility:"hidden"}:{}}>
             <button onClick={()=> {
                 if(month-1 === 0) {
                     setYear(year-1);
