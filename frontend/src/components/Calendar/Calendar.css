@@ -1,3 +1,12 @@
+.booking-grid {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+    margin: 10px 20px;
+}
 .calendar-grid {
     display: grid;
     width: 280px;
@@ -5,7 +14,7 @@
     font-family: 'Amatic SC', cursive;
     font-size: 20px;
     justify-items: center;
-    margin-left: 40px;
+    margin: 40px;
 }
 
 .calendar-grid .header {
@@ -15,12 +24,43 @@
     text-align: center;
 }
 .calendar {
+    box-sizing: border-box;
     width: 360px;
-    height: 210px;
+    min-height: 210px;
     position: relative;
 }
 
-.calendar h2, .time-picker h3 {
+.booking-grid .time {
+    box-sizing: border-box;
+    min-width: 360px;
+    position: relative;
+    margin-left: 20px;
+    padding: 0 20px 20px 20px;
+    border-left: 1px solid #AAA;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.booking-grid .time button {
+    margin-top: 15px;
+    padding: 5px;
+    width: 80px;
+    align-self: center;
+    font-family: 'Amatic SC', cursive;
+    font-size: 20px;
+    font-weight: bold;
+    background: #fff;
+    border-radius: 0;
+    border: 1px solid #AAA;
+}
+
+.booking-grid .time button:hover {
+    background: linear-gradient(to right, red, orange);
+    color: #fff;
+}
+
+.calendar h2, .time-picker h2 {
     font-family: 'Fredericka the Great', cursive;
     font-weight: 400;
     width: 100%;
@@ -93,7 +133,7 @@
     margin: 5px;
 }
 
-.time-picker span:hover {
+.time-picker span:hover,.time-picker span.selected {
     background: linear-gradient(45deg, rgba(255,0,0,1),rgba(255,165,0,1));
     color: #fff;
 }

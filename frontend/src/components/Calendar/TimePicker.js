@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 
-export default function TimePicker ({setPickedDate, date}) {
+export default function TimePicker ({setPickedDate, date, pickedDate}) {
     const bookings = useSelector(state=>state.bookings);
     const [times, setTimes] = useState([]);
 
@@ -17,7 +17,7 @@ export default function TimePicker ({setPickedDate, date}) {
 
     return (
         <div className="time-picker">
-            <h3>Available time:</h3>
+            <h2>Available time:</h2>
             {times.map(time=>{
                 const dt = new Date(time.time);
                 let h = dt.getHours();
@@ -25,7 +25,10 @@ export default function TimePicker ({setPickedDate, date}) {
                 m = ("0"+m).slice(m.length-1);
                 const ampm = h < 12?"AM":"PM";
                 return (
-                    <span onClick={()=>{setPickedDate(time.id)}} key={`time-h-m`}>{`${h%12}:${m} ${ampm}`}</span>
+                    <span 
+                    onClick={()=>{setPickedDate(time.id)}} key={`time-h-m`}
+                    className={(pickedDate===time.id)?"selected":""}
+                    >{`${h%12}:${m} ${ampm}`}</span>
                 )
             })} 
         </div>

@@ -77,53 +77,55 @@ export default function Calendar (props) {
     }
 
     return (
-    <div className="calendar">
-        <h2>{MonthsArray[month-1]+", "+year}</h2>
-        <div className="calendar-grid">
-            <div className="header">Su</div>
-            <div className="header">Mo</div>
-            <div className="header">Tu</div>
-            <div className="header">We</div>
-            <div className="header">Th</div>
-            <div className="header">Fr</div>
-            <div className="header">Sa</div>
-            {firstblock}
-            {monthCal.map(day => {
-                const date=month+"/"+day.getDate()+"/"+year;
-                return (
-                <DayCell 
-                    key={date} 
-                    day={day} 
-                    type={type} 
-                    onClickFn={onClick} 
-                    isAvailable={bookingDates.has(date)} 
-                    isSelected={selected.has(date)}/>
-                )
-            })}
+    <div className="booking-grid">
+        <div className="calendar">
+            <h2>{MonthsArray[month-1]+", "+year}</h2>
+            <div className="calendar-grid">
+                <div className="header">Su</div>
+                <div className="header">Mo</div>
+                <div className="header">Tu</div>
+                <div className="header">We</div>
+                <div className="header">Th</div>
+                <div className="header">Fr</div>
+                <div className="header">Sa</div>
+                {firstblock}
+                {monthCal.map(day => {
+                    const date=month+"/"+day.getDate()+"/"+year;
+                    return (
+                    <DayCell 
+                        key={date} 
+                        day={day} 
+                        type={type} 
+                        onClickFn={onClick} 
+                        isAvailable={bookingDates.has(date)} 
+                        isSelected={selected.has(date)}/>
+                    )
+                })}
+            </div>
+            <div className="prev-month" style={(thisMonth===month&&thisYear===year)?{visibility:"hidden"}:{}}>
+                <button onClick={()=> {
+                    if(month-1 === 0) {
+                        setYear(year-1);
+                        setMonth(12);
+                    } else {
+                        setMonth(month-1);
+                    }
+                }}><i className="fas fa-angle-double-left"></i></button>
+            </div>
+            <div className="next-month">
+                <button onClick={()=> {
+                    if(month+1 === 13) {
+                        setYear(year+1);
+                        setMonth(1);
+                    } else {
+                        setMonth(month+1);
+                    }
+                }}><i className="fas fa-angle-double-right"></i></button>
+            </div>
         </div>
-        <div className="prev-month" style={(thisMonth===month&&thisYear===year)?{visibility:"hidden"}:{}}>
-            <button onClick={()=> {
-                if(month-1 === 0) {
-                    setYear(year-1);
-                    setMonth(12);
-                } else {
-                    setMonth(month-1);
-                }
-            }}><i className="fas fa-angle-double-left"></i></button>
-        </div>
-        <div className="next-month">
-            <button onClick={()=> {
-                if(month+1 === 13) {
-                    setYear(year+1);
-                    setMonth(1);
-                } else {
-                    setMonth(month+1);
-                }
-            }}><i className="fas fa-angle-double-right"></i></button>
-        </div>
-        {(type==="radio" && selected.size && (
-            <>
-            <TimePicker date={[...selected][0]} setPickedDate={setPickedDate}/>
+        {(type==="radio" && (selected.size>0) && (
+            <div className="time">
+            <TimePicker date={[...selected][0]} setPickedDate={setPickedDate} pickedDate={pickedDate}/>
             <button 
                 disabled={pickedDate===0?"disabled":false} 
                 onClick={()=>{
@@ -132,7 +134,7 @@ export default function Calendar (props) {
                     setSelected(new Set());
                 }}
             >Confirm</button>
-            </>
+            </div>
         ))}
         
     </div>

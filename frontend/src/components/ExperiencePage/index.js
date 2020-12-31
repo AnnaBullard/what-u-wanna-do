@@ -17,17 +17,23 @@ export default function ExperiencePage () {
 
     const experience = useSelector(store => store.singleExperience);
     const bookings = useSelector(store => store.bookings);
+    const user = useSelector(store => store.session.user);
 
     return experience && (
-        <div className="card-info">
+        <>
+        <div className="card">
             <div className="card-image">
                 <img src={experience.imageUrl} alt={experience.title}/>
             </div>
-            <h1>{experience.title}</h1>
-            <p>by {experience.User?experience.User.username:""}</p>
-            <p><strong>Price:</strong> ${experience.currentPrice}</p>
-            <p><strong>About:</strong> {experience.description}</p>
-            <Calendar bookings={bookings} type={"radio"}/>
+            <div className="card-info">
+                <h1>{experience.title}</h1>
+                <p>by {experience.User?experience.User.username:""}</p>
+                <p><strong>Price:</strong> ${experience.currentPrice}</p>
+                <p><strong>Duration:</strong> {Math.floor(experience.duration/60)+" hour(s) "+experience.duration%60+" minute(s)"}</p>
+                <p><strong>About:</strong> {experience.description}</p>
+            </div>
         </div>
+        {(user.id !== experience.hostId) && <Calendar bookings={bookings} type={"radio"}/>}
+        </>
     )
 }
