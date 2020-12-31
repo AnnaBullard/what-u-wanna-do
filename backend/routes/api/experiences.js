@@ -108,5 +108,20 @@ router.get("/:id(\\d+)/bookings", asyncHandler(async (req, res) => {
         }
     })
     return res.json(exp);
-}))
+}));
+
+router.get("/:id(\\d+)/bookings/available", asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+    const exp = await db.Booking.findAll({
+        where:{
+            experienceId: id,
+            date: {
+                [Op.gt]: db.Sequelize.literal('current_date')
+            },
+            statusId: 1
+        }
+    })
+    return res.json(exp);
+}));
+
 module.exports = router;

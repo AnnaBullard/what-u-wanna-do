@@ -12,7 +12,7 @@ export default function ExperiencePage () {
 
     useEffect(()=>{
         dispatch(experienceActions.getExperience(id))
-        dispatch(bookingActions.getBookings(id))
+        dispatch(bookingActions.getBookings(id,"available"))
     },[dispatch, id]);
 
     const experience = useSelector(store => store.singleExperience);
@@ -28,7 +28,7 @@ export default function ExperiencePage () {
             <p>by {experience.User?experience.User.username:""}</p>
             <p><strong>Price:</strong> ${experience.currentPrice}</p>
             <p><strong>About:</strong> {experience.description}</p>
-            <Calendar bookings={bookings}/>
+            <Calendar bookings={bookings} type={"radio"}/>
         </div>
     )
 }

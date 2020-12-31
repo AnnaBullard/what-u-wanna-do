@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import DayCell from './DayCell';
 import './Calendar.css';
 
@@ -8,18 +9,14 @@ export default function Calendar (props) {
     const [monthCal, setMonthCal] = useState([]);
     const [firstblock, setFirstBlock] = useState("");
     const [selected, setSelected] = useState(new Set());
+    const [BookingDates, setBookingDates] = useState(new Set());
+    const [pickedDate, setPickedDate] = useState();
     const MonthsArray = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     const type = props.type || ""
+    const bookings = useSelector(state => state.bookings);
     //radio - select one of available   For: making bookings
     //checkbox select many,             For: creating experiences
     //"" - select one of any            For: selecting starting-ending date
-
-    const bookingDates = new Set();
-    if (type==="radio") {
-        props.bookings.forEach(book => {
-            console.log(book.date)
-        })
-    }
 
     if (!month || !year){
         let dt = new Date();
@@ -44,19 +41,30 @@ export default function Calendar (props) {
         }
     },[month,year])
 
+    useEffect(()=>{
+        if (type==="radio") {
+            const newSet = new Set();
+            bookings.forEach(book => {
+                const dt = new Date(book.date);
+                const str = (dt.getMonth()+1)+"/"+dt.getDate()+"/"+dt.getFullYear();
+                newSet.add(str);
+            })
+            setBookingDates(newSet);
+        }
+    },[bookings])
+
     function onClick(e) {
+        const day = `${month}/${e.target.innerHTML}/${year}`;
+        let newSet;
         if (type === "checkbox"){
-            const day = parseInt(e.target.innerHTML);
-            const newSet = new Set(selected);
-            newSet.add(day);
-            setSelected(newSet);
+            newSet = new Set(selected);
         }
         if (type==="radio" || type===""){
-            const day = parseInt(e.target.innerHTML);
-            const newSet = new Set();
-            newSet.add(day);
-            setSelected(newSet);
+            newSet = new Set();
         }
+        newSet.add(day);
+        setSelected(newSet);
+        console.log(selected);
     }
 
     return (
@@ -71,7 +79,18 @@ export default function Calendar (props) {
             <div className="header">Fr</div>
             <div className="header">Sa</div>
             {firstblock}
-            {monthCal.map(day => <DayCell day={day} type={type} onClickFn={onClick} isAvailable={day.getDate()%2===1} isSelected={selected.has(day.getDate())}/>)}
+            {monthCal.map(day => {
+                const date=month+"/"+day.getDate()+"/"+year;
+                return (
+                <DayCell 
+                    key={date} 
+                    day={day} 
+                    type={type} 
+                    onClickFn={onClick} 
+                    isAvailable={BookingDates.has(date)} 
+                    isSelected={selected.has(date)}/>
+                )
+            })}
         </div>
         <div className="prev-month">
             <button onClick={()=> {
@@ -81,7 +100,6 @@ export default function Calendar (props) {
                 } else {
                     setMonth(month-1);
                 }
-                setSelected(new Set());
             }}><i className="fas fa-angle-double-left"></i></button>
         </div>
         <div className="next-month">
@@ -92,9 +110,9 @@ export default function Calendar (props) {
                 } else {
                     setMonth(month+1);
                 }
-                setSelected(new Set());
             }}><i className="fas fa-angle-double-right"></i></button>
         </div>
+        
     </div>
     )
 }
