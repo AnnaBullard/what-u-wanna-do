@@ -1,19 +1,26 @@
 import {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import DayCell from './DayCell';
 import './Calendar.css';
+import TimePicker from './TimePicker';
+import {makeBooking} from '../../store/bookings';
 
 export default function Calendar (props) {
+    const dispatch = useDispatch();
     const [month, setMonth] = useState(props.month);
     const [year, setYear] = useState(props.year);
     const [monthCal, setMonthCal] = useState([]);
     const [firstblock, setFirstBlock] = useState("");
     const [selected, setSelected] = useState(new Set());
-    const [BookingDates, setBookingDates] = useState(new Set());
-    const [pickedDate, setPickedDate] = useState();
+    const [pickedDate, setPickedDate] = useState(0);
+    const [bookingDates, setBookingDates] = useState("");
+
     const MonthsArray = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     const type = props.type || ""
+
     const bookings = useSelector(state => state.bookings);
+    const user = useSelector(state => state.session.user);
+
     let dt = new Date();
     const thisMonth = dt.getMonth()+1;
     const thisYear = dt.getFullYear();
@@ -22,7 +29,6 @@ export default function Calendar (props) {
     //"" - select one of any            For: selecting starting-ending date
 
     if (!month || !year){
-        let dt = new Date();
         setMonth(thisMonth);
         setYear(thisYear);
     }
@@ -54,7 +60,7 @@ export default function Calendar (props) {
             })
             setBookingDates(newSet);
         }
-    },[bookings])
+    },[bookings, type])
 
     function onClick(e) {
         const day = `${month}/${e.target.innerHTML}/${year}`;
@@ -67,7 +73,7 @@ export default function Calendar (props) {
         }
         newSet.add(day);
         setSelected(newSet);
-        console.log(selected);
+        setPickedDate(0);
     }
 
     return (
@@ -90,12 +96,12 @@ export default function Calendar (props) {
                     day={day} 
                     type={type} 
                     onClickFn={onClick} 
-                    isAvailable={BookingDates.has(date)} 
+                    isAvailable={bookingDates.has(date)} 
                     isSelected={selected.has(date)}/>
                 )
             })}
         </div>
-        <div className="prev-month" style={(thisMonth==month&&thisYear==year)?{visibility:"hidden"}:{}}>
+        <div className="prev-month" style={(thisMonth===month&&thisYear===year)?{visibility:"hidden"}:{}}>
             <button onClick={()=> {
                 if(month-1 === 0) {
                     setYear(year-1);
@@ -115,6 +121,19 @@ export default function Calendar (props) {
                 }
             }}><i className="fas fa-angle-double-right"></i></button>
         </div>
+        {(type==="radio" && selected.size && (
+            <>
+            <TimePicker date={[...selected][0]} setPickedDate={setPickedDate}/>
+            <button 
+                disabled={pickedDate===0?"disabled":false} 
+                onClick={()=>{
+                    dispatch(makeBooking({booking: bookings.find(book=>book.id===pickedDate), user}));
+                    setPickedDate(0);
+                    setSelected(new Set());
+                }}
+            >Confirm</button>
+            </>
+        ))}
         
     </div>
     )

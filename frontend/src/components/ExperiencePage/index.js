@@ -12,7 +12,7 @@ export default function ExperiencePage () {
 
     useEffect(()=>{
         dispatch(experienceActions.getExperience(id))
-        dispatch(bookingActions.getBookings(id,"available"))
+        dispatch(bookingActions.getBookings(id))
     },[dispatch, id]);
 
     const experience = useSelector(store => store.singleExperience);
@@ -24,7 +24,6 @@ export default function ExperiencePage () {
                 <img src={experience.imageUrl} alt={experience.title}/>
             </div>
             <h1>{experience.title}</h1>
-            {/*ADD A LINK TO HOST's PAGE*/}
             <p>by {experience.User?experience.User.username:""}</p>
             <p><strong>Price:</strong> ${experience.currentPrice}</p>
             <p><strong>About:</strong> {experience.description}</p>

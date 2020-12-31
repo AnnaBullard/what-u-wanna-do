@@ -20,7 +20,7 @@
     position: relative;
 }
 
-.calendar h2 {
+.calendar h2, .time-picker h3 {
     font-family: 'Fredericka the Great', cursive;
     font-weight: 400;
     width: 100%;
@@ -77,4 +77,28 @@
     background: linear-gradient(45deg, rgba(255,0,0,1),rgba(255,165,0,1));
     color: #fff;
     cursor: pointer;
+}
+
+.time-picker span{
+    display: flex;
+    font-family: 'Amatic SC', cursive;
+    font-size: 25px;
+    width: 70px;
+    height: 40px;
+    background: linear-gradient(45deg, rgba(0,255,0,0.3),rgba(255, 255, 0, 0.3));
+    color: #333;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+.time-picker span:hover {
+    background: linear-gradient(45deg, rgba(255,0,0,1),rgba(255,165,0,1));
+    color: #fff;
+}
+.time-picker {
+    display: flex;
+    flex-wrap: wrap;
+
 }
