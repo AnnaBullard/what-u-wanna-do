@@ -17,14 +17,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      time: {
+      dateWithTimeZone: {
+        allowNull: false,
         type: Sequelize.DATE
-      },
-      timeMin: {
-        type: Sequelize.TIME
-      },
-      timeMax: {
-        type: Sequelize.TIME
       },
       price: {
         type: Sequelize.DECIMAL(10, 2)

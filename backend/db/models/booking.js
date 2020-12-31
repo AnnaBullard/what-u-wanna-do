@@ -3,9 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Booking = sequelize.define('Booking', {
     experienceId: DataTypes.INTEGER,
     date: DataTypes.DATE,
-    time: DataTypes.DATE,
-    timeMin: DataTypes.TIME,
-    timeMax: DataTypes.TIME,
+    dateWithTimeZone: DataTypes.DATE,
     price: DataTypes.DECIMAL(10, 2),
     userId: DataTypes.INTEGER,
     statusId: DataTypes.INTEGER,

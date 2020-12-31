@@ -13,7 +13,6 @@ export default function ListExperiences () {
 
     const list = useSelector(state => state.experiences);
 
-    console.log("list",list);
     return (<div>
       {list.map(activity => <ExperienceCard activity={activity} />)}
     </div>)

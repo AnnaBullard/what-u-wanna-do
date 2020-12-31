@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     locationId: DataTypes.INTEGER,
+    imageUrl: DataTypes.STRING,
     hostId: DataTypes.INTEGER
   }, {});
   Experience.associate = function(models) {

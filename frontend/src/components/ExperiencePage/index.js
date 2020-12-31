@@ -21,8 +21,7 @@ export default function ExperiencePage () {
     return experience && (
         <div className="card-info">
             <div className="card-image">
-                {/*REPLACE IMG*/}
-                <img src="/img/default-activity.jpg" alt={experience.title}/>
+                <img src={experience.imageUrl} alt={experience.title}/>
             </div>
             <h1>{experience.title}</h1>
             {/*ADD A LINK TO HOST's PAGE*/}

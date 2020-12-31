@@ -32,6 +32,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: {model: 'Locations'}
       },
+      imageUrl: Sequelize.STRING(500),
       hostId: {
         allowNull: false,
         type: Sequelize.INTEGER,

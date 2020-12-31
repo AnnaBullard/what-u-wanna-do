@@ -21,8 +21,7 @@ router.get("/", asyncHandler(async (req,res) => {
             'currentPrice',
             'locationId',
             'hostId',
-            // [db.sequelize.fn('COUNT', 'Bookings.id'), 'Count'],
-            // [db.sequelize.literal('current_time'), 'current time']
+            'imageUrl'
         ],
         include: [{
                 model: db.Booking,
@@ -30,7 +29,7 @@ router.get("/", asyncHandler(async (req,res) => {
                 where: {
                     statusId: 1,
                     date: {
-                        [Op.gte]: db.Sequelize.literal('current_date')
+                        [Op.gt]: db.Sequelize.literal('current_date')
                     }
             },
             },{
@@ -46,6 +45,7 @@ router.get("/", asyncHandler(async (req,res) => {
                 'Experience.currentPrice',
                 'Experience.locationId',
                 'Experience.hostId',
+                'Experience.imageUrl',
                 'User.id',
                 'User.username'],
         having: db.Sequelize.where(db.sequelize.fn('COUNT', 'Bookings.id'), {
@@ -53,7 +53,6 @@ router.get("/", asyncHandler(async (req,res) => {
             }),
         });
     exp = await exp.map(obj => obj.toJSON());
-    console.log(exp);
     return res.json(exp);
 }))
 
@@ -70,7 +69,6 @@ router.get("/booked", restoreUser, asyncHandler(async (req,res) => {
         ]
         });
     exp = await exp.map(obj => obj.toJSON());
-    console.log(exp);
     return res.json(exp);
 }));
 
@@ -87,7 +85,6 @@ router.get("/hosted", restoreUser, asyncHandler(async (req,res) => {
         }
         });
     exp = await exp.map(obj => obj.toJSON());
-    console.log(exp);
     return res.json(exp);
 }));
 
