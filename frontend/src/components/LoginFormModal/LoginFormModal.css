@@ -57,8 +57,9 @@ form input[type="text"],form input[type="password"],form input[type="number"], f
     position: relative;
     right: 20px;
     background: #fff;
-    box-shadow: 5px 5px 5px 0px #AAA;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.2);
     padding:10px;
+    z-index: 100;
 }
 
 .profile-dropdown > ul {

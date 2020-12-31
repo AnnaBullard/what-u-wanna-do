@@ -33,6 +33,7 @@ export const makeBooking = ({booking}) => async dispatch => {
     if (res.ok) {
         dispatch(book(res.data.id));
     };
+    return res;
 }
 
 const initialState = [];

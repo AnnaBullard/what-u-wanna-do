@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import DayCell from './DayCell';
 import './Calendar.css';
@@ -7,6 +8,7 @@ import {makeBooking} from '../../store/bookings';
 
 export default function Calendar (props) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [month, setMonth] = useState(props.month);
     const [year, setYear] = useState(props.year);
     const [monthCal, setMonthCal] = useState([]);
@@ -129,9 +131,15 @@ export default function Calendar (props) {
             <button 
                 disabled={pickedDate===0?"disabled":false} 
                 onClick={()=>{
-                    dispatch(makeBooking({booking: bookings.find(book=>book.id===pickedDate), user}));
-                    setPickedDate(0);
-                    setSelected(new Set());
+                    dispatch(makeBooking({booking: bookings.find(book=>book.id===pickedDate), user}))
+                        .then(()=>{
+                            setPickedDate(0);
+                            setSelected(new Set());
+                            history.push("/memories/booked")
+                        })
+                        .catch((res) => {
+                              if (res.data && res.data.errors) console.log(res.data.errors);
+                        })
                 }}
             >Confirm</button>
             </div>

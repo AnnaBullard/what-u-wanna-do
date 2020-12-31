@@ -1,1 +1,10 @@
 /* TODO Add site wide styles */
+.logo, h2 {
+    font-family: 'Fredericka the Great', cursive;
+} 
+
+h1 {
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    font-size: 32px; 
+}

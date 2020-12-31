@@ -25,6 +25,9 @@ function App() {
           <Route exact path="/experiences/:id">
             <ExperiencePage />
           </Route>
+          <Route>
+            <h2>Page Not Found</h2>
+          </Route>
         </Switch>
       )}
     </>
