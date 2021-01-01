@@ -33,7 +33,7 @@ export default function ExperiencePage () {
                 <p><strong>About:</strong> {experience.description}</p>
             </div>
         </div>
-        {(user.id !== experience.hostId) && <Calendar bookings={bookings} type={"radio"}/>}
+        {(user && user.id !== experience.hostId) && <Calendar bookings={bookings} type={"radio"}/>}
         </>
     )
 }

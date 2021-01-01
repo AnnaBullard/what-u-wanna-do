@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Topbar from "./components/Topbar";
 import ListExperiences from './components/ListExperiences';
 import ExperiencePage from './components/ExperiencePage';
+import MemoriesPage from './components/MemoriesPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route exact path="/experiences/:id">
             <ExperiencePage />
+          </Route>
+          <Route path={["/memories/:type", "/memories"]}>
+            <MemoriesPage />
           </Route>
           <Route>
             <h2>Page Not Found</h2>
