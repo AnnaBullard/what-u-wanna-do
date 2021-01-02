@@ -23,6 +23,15 @@
     object-fit: cover;
 }
 
+.experience-card img.passed {
+    filter: grayscale(100%);
+    transition: 1s all;
+}
+.experience-card img.passed:hover {
+    filter: grayscale(0);
+    transition: 1s all;
+}
+
 .experience-card {
     color: #333;
 }

@@ -12,7 +12,7 @@ export default function ExperiencePage () {
 
     useEffect(()=>{
         dispatch(experienceActions.getExperience(id))
-        dispatch(bookingActions.getBookings(id))
+        dispatch(bookingActions.getAvailable(id))
     },[dispatch, id]);
 
     const experience = useSelector(store => store.singleExperience);

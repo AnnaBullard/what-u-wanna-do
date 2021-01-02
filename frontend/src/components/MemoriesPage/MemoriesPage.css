@@ -25,3 +25,57 @@
     color: red;
     border-bottom: 1px solid #fff;
 }
+
+.booked-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.booked-card {
+    position: relative;
+    margin-top: 20px;
+}
+
+.card-date {
+    position: absolute;
+    top:0;
+    left: 10px;
+    width: 100px;
+    background-color: #fff;
+    border: 1px solid #AAA;
+    padding: 7px 5px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card-date.confirmed{
+    background: #fff linear-gradient(-45deg,rgba(0,255,0,0.4),rgba(255, 255, 0, 0.4));
+}
+.card-date.pending{
+    background: #fff linear-gradient(-45deg,rgba(255,0,0,0.4),rgba(255, 255, 0, 0.4));
+}
+
+.card-date.passed{
+    background: #fff;
+}
+
+.card-controls button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid #AAA;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.card-controls button:hover {
+    background: #fff linear-gradient(-45deg,red,orange);
+}

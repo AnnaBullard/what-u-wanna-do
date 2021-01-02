@@ -1,10 +1,10 @@
 import { fetch } from './csrf';
 
-const GET_ALL = "bookings/get_all";
-const BOOK = "booking/book"
+const GET = "bookings/get";
+const BOOK = "bookings/book";
 
-const getAll = (payload) => ({
-    type: GET_ALL,
+const getBookings = (payload) => ({
+    type: GET,
     payload
 });
 
@@ -13,16 +13,16 @@ const book = (id) => ({
     id
 });
 
-export const getBookings = (id) => async dispatch => {
-    let url = `/api/experiences/${id}/bookings/available`
-    const res = await fetch(url);
+export const getAvailable = (id) => async dispatch => {
+    const res = await fetch(`/api/experiences/${id}/bookings/available`);
     if (res.ok) {
-        dispatch(getAll(res.data));
+        dispatch(getBookings(res.data));
     };
 }
 
 export const makeBooking = ({booking}) => async dispatch => {
     let experience = await fetch(`/api/experiences/${booking.experienceId}`);
+    experience = experience.data;
     let res = await fetch(`/api/bookings/${booking.id}/book`,{
         method: "PATCH",
         body: JSON.stringify({
@@ -36,11 +36,25 @@ export const makeBooking = ({booking}) => async dispatch => {
     return res;
 }
 
+export const getBooked = () => async dispatch => {
+    const res = await fetch(`/api/bookings/booked`);
+    if (res.ok) {
+        dispatch(getBookings(res.data));
+    };
+}
+
+export const unbook = (id) => async dispatch => {
+    let res = await fetch(`/api/bookings/${id}/unbook`);
+    if (res.ok) {
+        dispatch(book(id));
+    };
+}
+
 const initialState = [];
 
 const BookingsReducer = (state = initialState, action) =>{
     switch(action.type){
-        case GET_ALL: {
+        case GET: {
             const newState = []
             action.payload.forEach(exp => {
                 newState.push({...exp});
