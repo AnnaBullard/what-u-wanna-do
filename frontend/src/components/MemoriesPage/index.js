@@ -7,12 +7,13 @@ import Booked from './Booked';
 import Locations from '../Locations';
 import Profile from './Profile';
 import Hosted from './Hosted';
+import Schedule from './Schedule';
 
 export default function MemoriesPage () {
     const {type} = useParams();
     const user = useSelector(state => state.session.user);
 
-    if ((!["booked","hosted","locations"].includes(type) && type !== undefined) || !user) {
+    if ((!["booked","hosted","locations","schedule"].includes(type) && type !== undefined) || !user) {
         return <Redirect to="/" />
     }
 
@@ -21,6 +22,7 @@ export default function MemoriesPage () {
     if (type === "booked") page = <Booked />;
     if (type === "locations") page = <Locations />;
     if (type === "hosted") page = <Hosted />;
+    if (type === "schedule") page = <Schedule />;
 
     return (
         <div className="memories-page">
