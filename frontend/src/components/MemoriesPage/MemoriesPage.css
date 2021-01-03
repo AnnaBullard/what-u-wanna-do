@@ -79,3 +79,8 @@
 .card-controls button:hover {
     background: #fff linear-gradient(-45deg,red,orange);
 }
+
+.profile-grid {
+    padding: 20px;
+    font-family: 'Raleway', sans-serif;
+}

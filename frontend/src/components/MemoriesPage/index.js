@@ -5,6 +5,8 @@ import {useSelector} from 'react-redux';
 import MemoriesNavigation from "./MemoriesNavigation";
 import Booked from './Booked';
 import Locations from '../Locations';
+import Profile from './Profile';
+import Hosted from './Hosted';
 
 export default function MemoriesPage () {
     const {type} = useParams();
@@ -14,10 +16,11 @@ export default function MemoriesPage () {
         return <Redirect to="/" />
     }
 
-    let page = <h1>profile page</h1>;
+    let page = <Profile />;
 
     if (type === "booked") page = <Booked />;
     if (type === "locations") page = <Locations />;
+    if (type === "hosted") page = <Hosted />;
 
     return (
         <div className="memories-page">
