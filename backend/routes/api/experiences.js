@@ -94,6 +94,10 @@ router.get("/:id(\\d+)", asyncHandler(async (req, res) => {
         include: [
             {
                 model: db.User
+            },
+            {
+                model: db.Location,
+                include: db.State
             }
         ]
     })

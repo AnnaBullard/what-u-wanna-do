@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getStates} from '../../store/states';
-import {editLocation} from '../../store/locations';
+import {editLocation,addLocation} from '../../store/locations';
 
 export default function LocationForm ({location, type, closeForm}) {
     const dispatch = useDispatch();
@@ -18,34 +18,42 @@ export default function LocationForm ({location, type, closeForm}) {
         dispatch(getStates()).then(res => {setIsLoaded(true)})
     },[dispatch])
 
+    useEffect(()=>{
+        console.log({
+            address1,address2,city,stateId,zip
+        })
+    },[address1,address2,city,stateId,zip])
+
     const handleSubmit = e => {
         e.preventDefault();
         if (!location) location = {}
-        console.log({
-            ...location,
-            address1,
-            address2,
-            city,
-            stateId,
-            zip
-        })
-        dispatch(editLocation({
-            ...location,
-            address1,
-            address2,
-            city,
-            stateId,
-            zip
-        }))
-        .then(res => {closeForm(false)})
-        .catch(
-            (res) => {
-              if (res.data && res.data.errors) setErrors(res.data.errors);
-            }
-          )
+
+        if (type==="edit") {
+            dispatch(editLocation({
+                ...location,
+                address1, address2, city, stateId, zip
+            }))
+            .then(res => {closeForm(false)})
+            .catch(
+                (res) => {
+                  if (res.data && res.data.errors) setErrors(res.data.errors);
+                }
+            )
+        } else {
+            dispatch(addLocation({
+                ...location,
+                address1, address2, city, stateId, zip
+            }))
+            .then(res => {closeForm(false)})
+            .catch(
+                (res) => {
+                  if (res.data && res.data.errors) setErrors(res.data.errors);
+                }
+            )
+        }
     }
 
-    return isLoaded && <form onSubmit={handleSubmit}>
+    return isLoaded && <form onSubmit={handleSubmit} className="location-form">
         <ul style={errors.length?{}:{display: "none"}}>
             {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -55,23 +63,27 @@ export default function LocationForm ({location, type, closeForm}) {
             <input type="text" name="address1" id ="address1"
             value={address1} onChange={e=>{setAddress1(e.target.value)}}/>
         </label>
-        <label htmlFor="address2"> Details
-            <input type="text" name="address2" id ="address2"
-            value={address2} onChange={e=>{setAddress2(e.target.value)}}/>
-        </label>
         <label htmlFor="city">City
             <input type="text" name="city" id ="city"
             value={city} onChange={e=>{setCity(e.target.value)}}/>
         </label>
-        <label htmlFor="state">State</label>
-        <select value={stateId} name="state" id ="state"onChange={e=>{setStateId(e.target.value)}}> 
-            {states.map(state=><option value={state.id} key={`${location.id}-${state.id}`}>{state.abb}</option>)}
-        </select>
+        <label htmlFor="state">State
+            <select value={stateId} name="state" id ="state"onChange={e=>{setStateId(e.target.value)}}> 
+                {states.map(state=><option value={state.id} key={`${location.id}-${state.id}`}>{state.abb}</option>)}
+            </select>
+        </label>
         <label htmlFor="zip">Zip
             <input type="text" name="zip" id ="zip"
             value={zip} onChange={e=>{setZip(e.target.value)}}/>
         </label>
-        <button type="submit">{type==="edit"?"Edit ":"Add "} Location</button>
+        <label htmlFor="address2"> Details
+            <input type="text" name="address2" id ="address2"
+            value={address2} onChange={e=>{setAddress2(e.target.value)}}/>
+        </label>
+        <div className="location-form-controls">
+            <button type="submit">{type==="edit"?"Edit ":"Add "} Location</button>
+            <button onClick={()=>{closeForm(false);}}>Cancel</button>
+        </div>
     </form>
 
 }

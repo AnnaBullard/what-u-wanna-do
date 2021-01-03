@@ -55,7 +55,7 @@ router.get("/", restoreUser, asyncHandler(async (req, res) => {
     })
 
     return res.json(locations);
-}))
+}));
 
 router.patch("/:id(\\d+)", restoreUser, validateLocation, asyncHandler(async (req, res) => {
     const user = await req.user.toJSON();
@@ -90,6 +90,56 @@ router.patch("/:id(\\d+)", restoreUser, validateLocation, asyncHandler(async (re
     })
 
     return res.json(updatedLocation);
+}));
+
+router.post("/", restoreUser, validateLocation, asyncHandler(async (req, res) => {
+    const user = await req.user.toJSON();
+    const {
+        address1,
+        address2,
+        city,
+        stateId,
+        zip
+    } = req.body;
+
+    const location = await db.Location.create({
+        address1,
+        address2,
+        city,
+        stateId,
+        zip,
+        userId: user.id
+    })
+
+    const updatedLocation = await db.Location.findByPk(location.id, {
+        include: db.State,
+        where: {
+            userId: user.id
+        }
+    })
+    
+    return res.json(updatedLocation);
+}));
+
+router.delete("/:id(\\d+)", restoreUser, asyncHandler(async(req,res)=>{
+    const user = await req.user.toJSON();
+    const id = parseInt(req.params.id);
+    let location = await db.Location.findByPk(id,{
+        include: db.Experience,
+        where: {
+            userId: user.id
+        }
+    });
+
+    if (location.Experiences.length>0){
+        await location.update({
+            userId: null
+        });
+    } else {
+        await location.destroy();
+    }
+
+    return res.json(location);
 }))
 
 router.get("/states", asyncHandler(async (req, res) => {

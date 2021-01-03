@@ -2,6 +2,7 @@ import { fetch } from './csrf';
 
 const GET = "locations/get";
 const EDIT = "locations/edit";
+const DELETE = "location/delete";
 
 const getAll = (payload) => ({
     type: GET,
@@ -11,6 +12,11 @@ const getAll = (payload) => ({
 const edit = (payload) => ({
     type: EDIT,
     payload
+})
+
+const remove = (id) => ({
+    type: DELETE,
+    id
 })
 
 export const getLocations = () => async dispatch => {
@@ -28,7 +34,28 @@ export const editLocation = (location) => async dispatch => {
     if (res.ok) {
         dispatch(edit(res.data));
     }
-    return res
+    return res;
+}
+
+export const addLocation = (location) => async dispatch => {
+    const res = await fetch(`/api/locations/`,{
+        method: "POST",
+        body: JSON.stringify(location)
+    })
+    if (res.ok) {
+        dispatch(edit(res.data));
+    }
+    return res;
+}
+
+export const deleteLocation = (id) => async dispatch => {
+    const res = await fetch(`/api/locations/${id}`,{
+        method: "DELETE"
+    })
+    if (res.ok) {
+        dispatch(remove(id));
+    }
+    return res;
 }
 
 const initialState = {};
@@ -45,6 +72,11 @@ const LocationsReducer = (state = initialState, action) =>{
         case EDIT: {
             const newState = {...state};
             newState[action.payload.id]={...action.payload}
+            return newState;
+        }
+        case DELETE: {
+            const newState = {...state};
+            delete newState[action.id];
             return newState;
         }
         default: {

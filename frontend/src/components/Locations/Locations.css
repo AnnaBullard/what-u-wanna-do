@@ -1,3 +1,7 @@
+.locations-grid {
+    padding: 20px;
+}
+
 .location-card {
     display:flex;
     flex-direction: row;
@@ -6,12 +10,23 @@
     padding: 10px;
     position: relative;
     justify-content: space-between;
+    margin-top: 20px;
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
 }
+
 .location-card .icon {
     border-right: none;
+    width: 10%;
+}
+
+.location-card .icon a{
     font-size: 40px;
     color: #aaa;
-    width: 10%;
+}
+
+.location-card .icon a:hover{
+    color: #333;
 }
 
 .location-card div {
@@ -20,6 +35,7 @@
     justify-content: center;
     padding: 10px;
     border-right: 1px solid #aaa;
+    font-family: 'Raleway', sans-serif;
 }
 
 .location-card .address{
@@ -31,7 +47,7 @@
     width: 10%;
 }
 
-.location-card .controls button {
+.location-control {
     bottom: 0;
     right: 0;
     width: 30px;
@@ -39,9 +55,52 @@
     background: #fff;
     box-shadow: none;
     border: 1px solid #AAA;
+    margin-top: 10px;
 }
 
-.location-card .controls button:hover {
+.location-control:hover {
     background: linear-gradient(45deg, red, orange);
     border: none;
+}
+
+.location-control:focus {
+    border: 1px solid #AAA;
+    outline: none;
+}
+
+form.location-form {
+    width: 600px;
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 50% 2fr 1fr 1fr; 
+    margin: 20px 0 0 0;
+}
+
+.location-form input,.location-form select {
+    box-sizing: border-box;
+    width:90%;
+}
+
+.location-form .location-form-controls {
+    display:flex;
+    flex-direction: row;
+    width: 100%;
+    grid-column: 2 / span 3;
+    padding: 0;
+    justify-self: center;
+    align-self: end;
+    justify-content: space-evenly;
+}
+
+.location-form button {
+    width: 45%;
+    height: 30px;
+}
+
+.location-string a {
+    color: #333;
+    text-decoration: none;
+}
+.location-string a:hover {
+    color: #000;
 }
