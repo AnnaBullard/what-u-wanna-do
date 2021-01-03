@@ -1,8 +1,9 @@
 import {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getStates} from '../../store/states';
+import {editLocation} from '../../store/locations';
 
-export default function LocationForm ({location, type}) {
+export default function LocationForm ({location, type, closeForm}) {
     const dispatch = useDispatch();
     const [address1, setAddress1] = useState(location?location.address1:"")
     const [address2, setAddress2] = useState(location?location.address2:"")
@@ -10,6 +11,7 @@ export default function LocationForm ({location, type}) {
     const [stateId, setStateId] = useState(location?location.stateId:0)
     const [zip, setZip] = useState(location?location.zip:"")
     const [isLoaded, setIsLoaded] = useState(false);
+    const [errors, setErrors] = useState([]);
     const states = useSelector(state=>state.states);
 
     useEffect(()=>{
@@ -18,10 +20,37 @@ export default function LocationForm ({location, type}) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log({address1,address2,city,stateId,zip})
+        if (!location) location = {}
+        console.log({
+            ...location,
+            address1,
+            address2,
+            city,
+            stateId,
+            zip
+        })
+        dispatch(editLocation({
+            ...location,
+            address1,
+            address2,
+            city,
+            stateId,
+            zip
+        }))
+        .then(res => {closeForm(false)})
+        .catch(
+            (res) => {
+              if (res.data && res.data.errors) setErrors(res.data.errors);
+            }
+          )
     }
 
     return isLoaded && <form onSubmit={handleSubmit}>
+        <ul style={errors.length?{}:{display: "none"}}>
+            {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+            ))}
+        </ul>
         <label htmlFor="address1"> Address
             <input type="text" name="address1" id ="address1"
             value={address1} onChange={e=>{setAddress1(e.target.value)}}/>

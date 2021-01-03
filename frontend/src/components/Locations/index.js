@@ -15,7 +15,7 @@ export default function Locations () {
     }, [dispatch])
 
     return isLoaded && <div className="locations-grid">
-        {locations.map(location => {
+        {Object.values(locations).map(location => {
             return (<LocationCard location={location} key={`location-${location.id}`} />)
         })}
     </div>
