@@ -4,12 +4,16 @@ import sessionReducer from './session';
 import ExperiencesReducer from './experiences';
 import SingleExperienceReducer from './singleExperience';
 import BookingsReducer from './bookings';
+import LocationsReducer from './locations';
+import StatesReducer from './states';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   experiences: ExperiencesReducer,
   singleExperience: SingleExperienceReducer,
-  bookings: BookingsReducer
+  bookings: BookingsReducer,
+  locations: LocationsReducer,
+  states: StatesReducer
 });
 
 let enhancer;

@@ -1,0 +1,47 @@
+.location-card {
+    display:flex;
+    flex-direction: row;
+    width: 600px;
+    border: 1px solid #aaa;
+    padding: 10px;
+    position: relative;
+    justify-content: space-between;
+}
+.location-card .icon {
+    border-right: none;
+    font-size: 40px;
+    color: #aaa;
+    width: 10%;
+}
+
+.location-card div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    border-right: 1px solid #aaa;
+}
+
+.location-card .address{
+    align-items: flex-start;
+    width: 60%;
+}
+.location-card .city-state, .location-card .zip, .location-card .controls {
+    align-items: center;
+    width: 10%;
+}
+
+.location-card .controls button {
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid #AAA;
+}
+
+.location-card .controls button:hover {
+    background: linear-gradient(45deg, red, orange);
+    border: none;
+}

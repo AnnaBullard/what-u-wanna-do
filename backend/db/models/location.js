@@ -6,8 +6,6 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING(25),
     stateId: DataTypes.INTEGER,
     zip: DataTypes.STRING(10),
-    lat: DataTypes.FLOAT(10,6),
-    lng: DataTypes.FLOAT(10,6),
     userId: DataTypes.INTEGER
   }, {});
   Location.associate = function(models) {
@@ -16,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     })
     Location.belongsTo(models.User, {
       foreignKey: "userId"
+    })
+    Location.hasMany(models.Experience, {
+      foreignKey: "locationId"
     })
   };
   return Location;

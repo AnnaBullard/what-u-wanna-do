@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import {useSelector} from 'react-redux';
 import MemoriesNavigation from "./MemoriesNavigation";
 import Booked from './Booked';
+import Locations from '../Locations';
 
 export default function MemoriesPage () {
     const {type} = useParams();
@@ -16,6 +17,7 @@ export default function MemoriesPage () {
     let page = <h1>profile page</h1>;
 
     if (type === "booked") page = <Booked />;
+    if (type === "locations") page = <Locations />;
 
     return (
         <div className="memories-page">

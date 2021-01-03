@@ -28,14 +28,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(10)
       },
-      lat: {
-        allowNull: false,
-        type: Sequelize.FLOAT(10,6)
-      },
-      lng: {
-        allowNull: false,
-        type: Sequelize.FLOAT(10,6)
-      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
