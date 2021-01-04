@@ -2,10 +2,12 @@ import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {getLocations} from '../../store/locations';
 import LocationForm from '../Locations/LocationForm';
+import {editExperience} from '../../store/experiences';
 
-export default function ExperienceEdit ({activity, type}) {
+export default function ExperienceEdit ({activity, type, closeForm}) {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState(activity?activity.title:"");
     const [description, setDecription] = useState(activity?activity.description:"");
     const [max, setMax] = useState(activity?activity.max:1);
@@ -22,23 +24,49 @@ export default function ExperienceEdit ({activity, type}) {
         dispatch(getLocations()).then(res=>{setIsLoaded(true)})
     }, [dispatch])
 
-    const handleSubmit = () => {
-        console.log({
-            title,
-            description,
-            max,
-            duration,
-            currentPrice,
-            locationId,
-            imageUrl,
-            hostId: user.id
-        })
+    const handleSubmit = e => {
+        e.preventDefault();
+        let experience = {};
+        if (type==="edit") {
+            experience = {
+                ...activity,
+                title,
+                description,
+                max,
+                duration,
+                currentPrice,
+                locationId,
+                imageUrl
+            }
+        } else {
+            experience = {
+                title,
+                description,
+                max,
+                duration,
+                currentPrice,
+                locationId,
+                imageUrl,
+                hostId: user.id
+            }
+        }
+        dispatch(editExperience({experience, type}))
+        .then(res => {closeForm()})
+        .catch(
+            (res) => {
+                if (res.data && res.data.errors) setErrors(res.data.errors);
+            })
     }
 
     return isLoaded && <div>
-        <form style={{width: "800px",
-    display: "flex",
-    flexDirection: "column"}}>
+        <form 
+        style={{width: "800px", display: "flex", flexDirection: "column"}}
+        onSubmit={handleSubmit}>
+            <div>
+                <ul>
+                    {errors.map(error=><option key={"error-"+error}>{error}</option>)}
+                </ul>
+            </div>
             <div className="experience-edit">
                 <div>
                     <label>
@@ -76,7 +104,10 @@ export default function ExperienceEdit ({activity, type}) {
                     <label>
                         Location
                         <span className="inline">
-                        <select style={{width:"210px"}} value={locationId} onChange={e => {setLocationId(e.target.value)}} disabled={(addLocationShow?"disabled":false)}>
+                        <select style={{width:"210px"}} 
+                        value={locationId} 
+                        onChange={e => {setLocationId(e.target.value)}} disabled={(addLocationShow?"disabled":false)}>
+                            <option value={0}>--Pick a location--</option>
                             {Object.values(locations).map(location =>
                             <option 
                                 key={`location`+location.id} 
@@ -92,7 +123,13 @@ export default function ExperienceEdit ({activity, type}) {
                     </label>
                 </div>
             </div>
-            <button style={{width: "auto"}} disabled={(addLocationShow?"disabled":false)}>{type==="edit"?"Edit ":"Add "} Experience</button>
+            <div style={{display:"flex",flexDirection:"row",justifyContent:"space-evenly"}}>
+                <button style={{width: "auto"}} disabled={(addLocationShow?"disabled":false)}>{type==="edit"?"Edit ":"Add "} Experience</button>
+                <button onClick={e => {
+                    e.preventDefault();
+                    closeForm();
+                }}>Cancel</button>
+            </div>
         </form>
         {addLocationShow && <LocationForm type="add-from-experience" closeForm={setAddLocationShow}/>}
     </div>

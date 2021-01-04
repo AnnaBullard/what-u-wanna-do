@@ -13,12 +13,7 @@ export default function HostedList () {
     }, [dispatch])
 
     return isLoaded && <div className="hosted-grid">
-        {experiences.map(activity=>
-        <div className="booked-card" key={"booking-item-"+activity.id}>
-            <ExperienceCard activity={activity} key={"experience-hosted-"+activity.id}/>
-            <div className="card-controls">
-                <button onClick={()=>{}}><i className="fas fa-edit"></i></button>
-            </div>
-        </div>)}
+        {Object.values(experiences).map(activity=>
+        <ExperienceCard activity={activity} key={"experience-hosted-"+activity.id}/>)}
     </div>
 }
