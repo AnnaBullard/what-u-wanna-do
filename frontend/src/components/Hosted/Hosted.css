@@ -1,0 +1,26 @@
+.experience-edit {
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.experience-edit > div {
+    width: 30%;
+}
+
+.experience-edit .inline, .experience-edit .inline span {
+    display: flex;
+    flex-direction: row;
+}
+
+.location-control {
+    margin-top: 0;
+    padding: 0;
+}
+
+.hosted-grid {
+    padding-top: 20px;
+}

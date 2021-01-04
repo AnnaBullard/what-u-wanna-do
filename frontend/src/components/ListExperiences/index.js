@@ -14,6 +14,6 @@ export default function ListExperiences () {
     }, [dispatch]);
 
     return (isLoaded && <div>
-      {list.map(activity => <ExperienceCard activity={activity} />)}
+      {list.map(activity => <ExperienceCard activity={activity} key={"experience-list"+activity.id}/>)}
     </div>)
 }

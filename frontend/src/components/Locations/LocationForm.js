@@ -18,12 +18,6 @@ export default function LocationForm ({location, type, closeForm}) {
         dispatch(getStates()).then(res => {setIsLoaded(true)})
     },[dispatch])
 
-    useEffect(()=>{
-        console.log({
-            address1,address2,city,stateId,zip
-        })
-    },[address1,address2,city,stateId,zip])
-
     const handleSubmit = e => {
         e.preventDefault();
         if (!location) location = {}
@@ -69,7 +63,7 @@ export default function LocationForm ({location, type, closeForm}) {
         </label>
         <label htmlFor="state">State
             <select value={stateId} name="state" id ="state"onChange={e=>{setStateId(e.target.value)}}> 
-                {states.map(state=><option value={state.id} key={`${location.id}-${state.id}`}>{state.abb}</option>)}
+                {states.map(state=><option value={state.id} key={`state-${state.id}`}>{state.abb}</option>)}
             </select>
         </label>
         <label htmlFor="zip">Zip

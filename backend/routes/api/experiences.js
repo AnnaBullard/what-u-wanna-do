@@ -77,7 +77,14 @@ router.get("/hosted", restoreUser, asyncHandler(async (req,res) => {
     const user = await req.user.toJSON();
     let exp = await db.Experience.findAll({
         include: [{
-                model: db.Booking
+                model: db.Booking,
+                where: {
+                    statusId: [1, 2, 3],
+                    date: {
+                        [Op.gt]: db.Sequelize.literal('current_date')
+                    }
+                },
+                required:false
             }
         ],
         where: {

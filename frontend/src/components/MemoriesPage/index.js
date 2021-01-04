@@ -6,7 +6,7 @@ import MemoriesNavigation from "./MemoriesNavigation";
 import Booked from './Booked';
 import Locations from '../Locations';
 import Profile from './Profile';
-import Hosted from './Hosted';
+import Hosted from '../Hosted';
 import Schedule from './Schedule';
 
 export default function MemoriesPage () {

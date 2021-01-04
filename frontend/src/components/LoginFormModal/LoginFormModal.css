@@ -45,7 +45,12 @@ form button:focus, form input:focus {
     outline: 1px solid #AAA;
 }
 
-form input[type="text"],form input[type="password"],form input[type="number"], form input[type="date"], form select{
+form input[type="text"],
+form input[type="password"],
+form input[type="number"], 
+form input[type="date"], 
+form select,
+form textarea{
     border-radius: 0;
     border-radius: 0;
     border: 1px solid #AAA;
@@ -53,6 +58,10 @@ form input[type="text"],form input[type="password"],form input[type="number"], f
     font-family: 'Raleway', sans-serif;
     height: 30px;
     box-sizing: border-box;
+}
+
+form textarea{
+    height: auto;
 }
 
 .profile-dropdown {

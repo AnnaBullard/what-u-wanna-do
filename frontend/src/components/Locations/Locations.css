@@ -13,6 +13,7 @@
     margin-top: 20px;
     font-family: 'Raleway', sans-serif;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .location-card .icon {
@@ -55,7 +56,6 @@
     background: #fff;
     box-shadow: none;
     border: 1px solid #AAA;
-    margin-top: 10px;
 }
 
 .location-control:hover {
